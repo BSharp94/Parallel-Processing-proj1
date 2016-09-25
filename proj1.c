@@ -9,7 +9,8 @@ int dataSize2 = 10;	//default size of array and matrix
 
 /* Time functions */
 
-int timeval_subtract(struct timeval *result, struct timeval *t2, struct timeval *t1){
+int timeval_subtract(struct timeval *result, struct timeval *t2, struct timeval *t1)
+{
 	long int diff = (t2->tv_usec + 1000000 * t2->tv_sec) - (t1->tv_usec + 1000000*t1->tv_sec);
 	result->tv_sec = diff / 1000000;
 	result->tv_usec = diff % 1000000;
@@ -30,6 +31,9 @@ void timeval_print(struct timeval *tv){
 }
 /* End Time Functions */
 
+
+//Constant function runs O(1) time. simply returns the first item in an array
+
 void constant(int array[],struct timeval *tvBegin,struct timeval *tvEnd){
 	
 	//start time
@@ -45,6 +49,7 @@ void constant(int array[],struct timeval *tvBegin,struct timeval *tvEnd){
 
 }
 
+//Linear function runs O(n) time. Returns a linear search of the items in the array 
 void linear(int array[],int arraySize, int searchValue,struct timeval *tvBegin, struct timeval *tvEnd){
 	
 
@@ -68,7 +73,7 @@ void linear(int array[],int arraySize, int searchValue,struct timeval *tvBegin, 
 }
 
 
-
+//Bubble sort runs at O(n^2) time. 
 void bubble(int array[],int dataSize, struct timeval *tvBegin, struct timeval *tvEnd){
 	
 
@@ -95,6 +100,7 @@ void bubble(int array[],int dataSize, struct timeval *tvBegin, struct timeval *t
 
 }
 
+//Matrix Multiplication simulates O(n^3) time. 
 void matrix_mult(int (*matrixA)[dataSize], int (*matrixB)[dataSize],struct timeval *tvBegin, struct timeval *tvEnd){
 
 	//start time
