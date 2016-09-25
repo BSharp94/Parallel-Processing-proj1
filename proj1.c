@@ -41,23 +41,20 @@ void getRandArray(int array[],int dataSize){
 	}
 	
 }
-/*
-void getRandMatrix(int dataSize){
+
+void getRandMatrix(int dataSize, int matrix[dataSize][dataSize]){
 
 	srand(time(NULL));	//seed rand with time
 	
 	int i,j;
-	int array[dataSize][dataSize];
 	for(i = 0; i < dataSize;i++){
 		for(j = 0;j < dataSize;j++){
-			array[i][j] = (rand() %100) + 1;	//random number between 1-100
+			matrix[i][j] = (rand() %100) + 1;	//random number between 1-100
 		}
 	}
 
-	return array;
-
 }
-*/
+
 /* End Generator funcions */
 
 /* Begin Time Funcions */
