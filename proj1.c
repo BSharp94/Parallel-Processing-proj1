@@ -4,8 +4,6 @@
 #include <sys/time.h>
 #include <math.h>
 
-int dataSize2 = 10;	//default size of array and matrix
-
 
 /* Time functions */
 
@@ -31,6 +29,38 @@ void timeval_print(struct timeval *tv){
 }
 /* End Time Functions */
 
+/* Begin Generator functions */
+
+void getRandArray(int array[],int dataSize){
+	
+	srand(time(NULL));	//seed rand with time
+	
+	int i;
+	for(i = 0; i< dataSize;i++){
+		array[i] = (rand() % 100) + 1;	//random number between 1-100
+	}
+	
+}
+/*
+void getRandMatrix(int dataSize){
+
+	srand(time(NULL));	//seed rand with time
+	
+	int i,j;
+	int array[dataSize][dataSize];
+	for(i = 0; i < dataSize;i++){
+		for(j = 0;j < dataSize;j++){
+			array[i][j] = (rand() %100) + 1;	//random number between 1-100
+		}
+	}
+
+	return array;
+
+}
+*/
+/* End Generator funcions */
+
+/* Begin Time Funcions */
 
 //Constant function runs O(1) time. simply returns the first item in an array
 
@@ -101,7 +131,9 @@ void bubble(int array[],int dataSize, struct timeval *tvBegin, struct timeval *t
 }
 
 //Matrix Multiplication simulates O(n^3) time. 
-void matrix_mult(int (*matrixA)[dataSize], int (*matrixB)[dataSize],struct timeval *tvBegin, struct timeval *tvEnd){
+/*void matrix_mult(int dataSize,struct timeval *tvBegin, struct timeval *tvEnd){
+
+	//get matricies
 
 	//start time
 	gettimeofday(tvBegin, NULL);
@@ -115,6 +147,8 @@ void matrix_mult(int (*matrixA)[dataSize], int (*matrixB)[dataSize],struct timev
 	timeval_print(tvEnd);
 
 }
+*/
+/*End Time Functions */
 
 
 int main(){
@@ -123,7 +157,7 @@ int main(){
 	int dataSize = 10;
 	printf("Please enter the data size: n = ");
 	scanf("%d", &dataSize);
-	dataSize2 = dataSize;
+	
 	//initialize time values
 	struct timeval tvBegin, tvEnd, tvDiff;
 
@@ -131,11 +165,8 @@ int main(){
 	/*	Begin Constant Search	*/
 	{
 		//Generate array
-		srand(time(NULL));
-		int i,array[dataSize];
-		for(i = 0; i< dataSize;i++){
-			array[i] = (rand() % 100) + 1;
-		}
+		int array [dataSize];
+		getRandArray(array,dataSize);		
 
 		//run constant search
 		constant(array,&tvBegin,&tvEnd);
@@ -193,6 +224,7 @@ int main(){
 
 	/*	Begin Matrix Mult	*/	
 	{
+		/*
 		//generate random array
 		srand(time(NULL));
 		int i,j;
@@ -213,6 +245,7 @@ int main(){
 		//timeval_subtract(&tvDiff, &tvEnd, &tvBegin);
 		//printf("Matrix Time");
 		//printf("%ld.%06ld\n", tvDiff.tv_sec, tvDiff.tv_usec);
+		*/
 	}
 	/*	End Matrix Mult		*/
 	
