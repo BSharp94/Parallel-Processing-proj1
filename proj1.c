@@ -42,9 +42,9 @@ void getRandArray(int array[],int dataSize){
 	
 }
 
-void getRandMatrix(int dataSize, int matrix[dataSize][dataSize]){
+void getRandMatrix(int dataSize, int matrix[dataSize][dataSize],int offset){
 
-	srand(time(NULL));	//seed rand with time
+	srand(time(NULL) + offset);	//seed rand with time
 	
 	int i,j;
 	for(i = 0; i < dataSize;i++){
@@ -128,9 +128,19 @@ void bubble(int array[],int dataSize, struct timeval *tvBegin, struct timeval *t
 }
 
 //Matrix Multiplication simulates O(n^3) time. 
-/*void matrix_mult(int dataSize,struct timeval *tvBegin, struct timeval *tvEnd){
+void matrix_mult(int dataSize,int matrixA[dataSize][dataSize],int matrixB[dataSize][dataSize],struct timeval *tvBegin, struct timeval *tvEnd){
 
-	//get matricies
+	
+
+	//generate Result matrix
+	int matrixResult[dataSize][dataSize];
+
+	int i,j,k;
+	for(i = 0; i<dataSize;i++){
+		for(j = 0; j< dataSize; j++){
+			matrixResult[i][j] = 0;
+		}
+	}
 
 	//start time
 	gettimeofday(tvBegin, NULL);
@@ -138,13 +148,20 @@ void bubble(int array[],int dataSize, struct timeval *tvBegin, struct timeval *t
 
 	//compute matrix multiplication
 	
-
+	for(i = 0; i < dataSize;i++){
+		for(j = 0; j < dataSize;j++){
+			//for each cell in the result matrix
+			for(k = 0; k <dataSize; k++){
+				matrixResult[i][j] += matrixA[i][k] * matrixB[k][j];			
+			}
+		}
+	}
 	//stop time
 	gettimeofday(tvEnd, NULL);
 	timeval_print(tvEnd);
 
 }
-*/
+
 /*End Time Functions */
 
 
@@ -221,28 +238,23 @@ int main(){
 
 	/*	Begin Matrix Mult	*/	
 	{
-		/*
+		
 		//generate random array
-		srand(time(NULL));
-		int i,j;
-		int **matrixA, **matrixB;
+		int matrixA[dataSize][dataSize];
+		int matrixB[dataSize][dataSize];
 
-		//allocate for the matrix	
-		for(i = 0; i< dataSize;i++){
-			for(j = 0; j < dataSize; j++){
-				matrixA[i][j] = (rand() % 100) + 1;
-				matrixB[i][j] = (rand() % 100) + 1;
-			}
-		}
+		getRandMatrix(dataSize,matrixA,0);
+		getRandMatrix(dataSize,matrixB,1000);
 
 		//run  Matrix Mult
-		matrix_mult(matrixA[dataSize2],matrixB[dataSize2],&tvBegin,&tvEnd);
+		matrix_mult(dataSize,matrixA,matrixB,&tvBegin,&tvEnd);
 
+		
 		//record data
-		//timeval_subtract(&tvDiff, &tvEnd, &tvBegin);
-		//printf("Matrix Time");
-		//printf("%ld.%06ld\n", tvDiff.tv_sec, tvDiff.tv_usec);
-		*/
+		timeval_subtract(&tvDiff, &tvEnd, &tvBegin);
+		printf("Matrix Time");
+		printf("%ld.%06ld\n", tvDiff.tv_sec, tvDiff.tv_usec);
+		
 	}
 	/*	End Matrix Mult		*/
 	
