@@ -159,7 +159,6 @@ void matrix_mult(int dataSize,int matrixA[dataSize][dataSize],int matrixB[dataSi
 	//stop time
 	gettimeofday(tvEnd, NULL);
 	timeval_print(tvEnd);
-
 }
 
 /*End Time Functions */
