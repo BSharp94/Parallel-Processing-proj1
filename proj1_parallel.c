@@ -4,6 +4,9 @@
 #include <sys/time.h>
 #include <math.h>
 
+#include <mpi.h>
+
+#define np 16
 
 /* Time functions */
 
@@ -65,7 +68,21 @@ void constant(int array[],struct timeval *tvBegin,struct timeval *tvEnd){
 
 //Linear function runs O(n) time. Returns a linear search of the items in the array 
 void linear(int array[],int arraySize, int searchValue,struct timeval *tvBegin, struct timeval *tvEnd){
-	
+	//divide data
+	int dataAllocation[np];
+	int overAllocation = arraySize % np;
+
+	int partition;
+	for(partition = 0; partition < np; partition++){
+		if(partition<overAllocation){
+			dataAllocation[partition] = arraySize / np + 1;
+		}else{
+			dataAllocation[partition] = arraySize / np;
+		}
+	}
+
+	int my_id,root_process, ierr, num_procs;
+	M	
 
 	//start time
 	gettimeofday(tvBegin, NULL);
