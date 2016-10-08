@@ -1,0 +1,2 @@
+#!/bin/ksh
+mpirun -np $1 parallel_exec

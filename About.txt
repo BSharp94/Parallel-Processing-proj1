@@ -1,0 +1,67 @@
+###########################################################
+###							###
+###		Parallel Programming Proj 1		###
+###		by Brian Sharp				###
+
+Make files
+
+	> make
+
+Run the Single Process
+	>run_single
+
+Run the Parallel Process
+
+	>./run_parallel ##
+
+		where,	## is the number of process in algorithms
+
+Edit Parallel settings
+
+	>vim proj1_parallel.c
+	
+	Then edit the two defines ARRAY_SIZE, MATRIX_SIZE
+	
+	>make
+	
+	>./run_parallel ##
+
+		where,	## is the number of process in algorithms
+
+Algorithms
+
+O(1) - constant search
+	the constant search works by sending a full array out and
+	asking for the value at the first index
+
+	this usually takes 1 microsecond on a single threaded 
+	this usually takes 100 microsecond on a single threaded
+
+
+O(n) - 	linear search
+	the linear search break up the array into allocations and
+	allows each processor to search that section
+
+	this is usually 2 microsecond for a single threaded @ 1000 
+	this usually takes 100 microsecond on a parallel theadd
+
+	clearly no speed up yet
+
+O(n^2) - bubble search
+
+	the bubble search breaks up allocation for even and odd
+	phases. It send each slave an array to do swaps upon. 
+	
+	this takes 1000 microsecond for a single thread @ 500
+	this takes 5000 microsecond for a single thread @ 1000
+
+	this takes 700 microsecond for a parallel thead @500 np=10
+	
+O(n^3) - matrix mult
+	
+	the matrix multiplication distributes the matrix across
+	the node then sends rows of info for calulations
+
+	this takes 9.7 second for a 1000x1000 matrix single threaded
+	this takes .5 second for a 1000x1000 matrix with np =505 second for a 1000x1000 matrix with np =505 second for a 1000x1000 matrix with np =505 second for a 1000x1000 matrix with np =505 second for a 1000x1000 matrix with np =50 	
+ 	
